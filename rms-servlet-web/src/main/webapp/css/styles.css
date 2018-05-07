@@ -1,6 +1,6 @@
 .box-center {
 	align-items: center;
-    justify-content: center;
+	justify-content: center;
 }
 
 .mdl-layout__content {
@@ -9,11 +9,28 @@
 }
 
 .demo-layout-transparent {
-  background-color: #006be5;
+	background-color: #006be5;
 }
-.demo-layout-transparent .mdl-layout__header,
-.demo-layout-transparent .mdl-layout__drawer-button {
-  /* This background is dark, so we set text to white. Use 87% black instead if
+
+.demo-layout-transparent .mdl-layout__header, .demo-layout-transparent .mdl-layout__drawer-button
+	{
+	/* This background is dark, so we set text to white. Use 87% black instead if
      your background is light. */
-  color: white;
+	color: white;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.box-button {
+	padding-bottom: 5px;
+	text-align:center;
 }
