@@ -33,15 +33,19 @@ public class UserServlet extends AbstractController {
 			User user = userDao.find(userId).get();
 			req.setAttribute("user", user);
 		} else if (req.getPathInfo().contains("/delete")) {
-			pathInfo = "/list";
 			Long userId = Long.parseLong(req.getParameter("userId"));
 			User user = userDao.find(userId).get();
 			boolean isSuccess = userDao.delete(user);
 			List<User> users = userDao.findAll();
 			req.setAttribute("users", users);
 			req.setAttribute("isDeleteSuccess", isSuccess);
-		} else {
+			resp.sendRedirect(req.getContextPath() + req.getServletPath() + "/list");
+			return;
+		} else if ("/form".equalsIgnoreCase(req.getPathInfo())) {
 			pathInfo = "/form";
+		} else {
+			resp.sendRedirect(req.getContextPath() + "/index.jsp");
+			return;
 		}
 
 		String path = getTemplatePath(req.getServletPath() + pathInfo);
@@ -69,10 +73,11 @@ public class UserServlet extends AbstractController {
 		}
 		String path = getTemplatePath(req.getServletPath() + "/list");
 		System.out.println("======== POST " + path);
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher(path);
+		// RequestDispatcher requestDispatcher = req.getRequestDispatcher(path);
 		List<User> users = userDao.findAll();
 		req.setAttribute("users", users);
-		requestDispatcher.forward(req, resp);
+		// requestDispatcher.forward(req, resp);
+		resp.sendRedirect(req.getContextPath() + req.getServletPath() + "/list");
 	}
 
 }

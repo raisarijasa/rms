@@ -26,6 +26,7 @@
 	<div class="mdl-layout mdl-js-layout mdl-color--grey-100 box-center">
 		<main class="mdl-layout__content">
 		<div class="box-button">
+			<a href="home" class="button">Back</a>
 			<a href="form" class="button">Add New User</a>
 		</div>
 		<table

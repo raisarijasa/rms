@@ -13,16 +13,36 @@ import com.mitrais.rms.model.User;
 
 import java.io.IOException;
 
-@WebServlet("/login")
+@WebServlet("/auth/*")
 public class LoginServlet extends AbstractController {
+	private static final String HOME = "/index.jsp";
+	private static final String LOGIN = "/login";
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("=======login");
-		String path = getTemplatePath(req.getServletPath());
-		System.out.println(path);
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher(path);
-		requestDispatcher.forward(req, resp);
+		String path = HOME;
+		String pathInfo = "";
+		if (LOGIN.equalsIgnoreCase(req.getPathInfo())) {
+			System.out.println("=======login");
+			pathInfo = LOGIN;
+			path = getTemplatePath(pathInfo);
+			System.out.println("======= " + path);
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher(path);
+			requestDispatcher.forward(req, resp);
+			return;
+		} else if ("/logout".equalsIgnoreCase(req.getPathInfo())) {
+			HttpSession session = req.getSession(false);
+			session.removeAttribute("username");
+			session.getMaxInactiveInterval();
+			System.out.println("=======logout");
+			path = HOME;
+			System.out.println("======= " + path);
+		} else {
+			System.out.println("=======home");
+			path = HOME;
+		}
+		resp.sendRedirect(req.getContextPath() + path);
+		
 	}
 
 	@Override
@@ -35,8 +55,9 @@ public class LoginServlet extends AbstractController {
 		if (user.getUserName().equalsIgnoreCase(username) && user.getPassword().equalsIgnoreCase(password)) {
 			HttpSession session = req.getSession();
 			session.setAttribute("username", username);
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("");
-			requestDispatcher.forward(req, resp);
+//			RequestDispatcher requestDispatcher = req.getRequestDispatcher(HOME);
+//			requestDispatcher.forward(req, resp);
+			resp.sendRedirect(req.getContextPath() + HOME);
 		}
 	}
 }

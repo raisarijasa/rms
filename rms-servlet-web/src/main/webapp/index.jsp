@@ -32,11 +32,11 @@
 				<!-- Navigation -->
 				<nav class="mdl-navigation">
 					<% if (username == null) { %>
-					<a class="mdl-navigation__link" href="login">Login</a>
+					<a class="mdl-navigation__link" href="auth/login">Login</a>
 					<% } else { %>
 					<a class="mdl-navigation__link" href="users/list">Users</a> 
 					<a class="mdl-navigation__link" href="">Link</a> 
-					<a class="mdl-navigation__link" href="" onclick="doLogout();return false;">Logout</a>
+					<a class="mdl-navigation__link" href="auth/logout">Logout</a>
 					<% }%>
 				</nav>
 			</div>
@@ -45,22 +45,22 @@
 			<span class="mdl-layout-title">RMS</span>
 			<nav class="mdl-navigation">
 				<% if (username == null) { %>
-				<a class="mdl-navigation__link" href="login">Login</a>
+				<a class="mdl-navigation__link" href="auth/login">Login</a>
 				<% } else { %> 
 				<a class="mdl-navigation__link" href="users/list">Users</a> 
 				<a class="mdl-navigation__link" href="">Link</a> 
-				<a class="mdl-navigation__link" onclick="doLogout()">Logout</a>
+				<a class="mdl-navigation__link" href="auth/logout">Logout</a>
 				<% }%>
 			</nav>
 		</div>
 		<main class="mdl-layout__content"> </main>
 	</div>
 	<script src="js/scripts.js"></script>
-	<script>
-	function doLogout() {
-		request.getSession().removeAttribute("username");
-		response.setHeader("REFRESH", "0");
-	}
-	</script>
+<!-- 	<script>
+// 	function doLogout() {
+// 		request.getSession().removeAttribute("username");
+// 		response.setHeader("REFRESH", "0");
+// 	}
+ 	</script> -->
 </body>
 </html>
